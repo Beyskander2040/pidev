@@ -31,7 +31,7 @@ class AjouteruserType extends AbstractType
                 'choices' => [
                     'Utilisateur' => 'ROLE_USER',
                     'Vendeur' => 'ROLE_VENDEUR',
-                    'Administrateur' => 'ROLE_ADMIN'
+                    // 'Administrateur' => 'ROLE_ADMIN'
                 ],
 
                 'expanded' => true,

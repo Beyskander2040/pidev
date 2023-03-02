@@ -8,6 +8,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 Use App\Form\RegistrationFormType;
 use App\Form\EdituserType;
+use App\Form\EditProfileType;
 use App\Form\AjouteruserType;
 use App\Entity\User;
 use Doctrine\Persistence\ManagerRegistry;
@@ -47,9 +48,22 @@ class AdminController extends AbstractController
         ]);           
     }
 
+    #[Route('/admin/profile', name: 'profile')]
+    
+    public function profile(): Response
+    {
+
+        $user = $this->getUser();
+        return $this->render('admin/profile.html.twig', [
+            'user' => $user,
+        
+            
+        ]);
+    }
+
      #[Route('/utlisateurs/modifier/{id}  ', name: 'modifier_utlisateurs')]
        public function editUser(User $user, Request $request, TranslatorInterface $translator){
-        $form = $this->createForm(EditUserType::class, $user);
+        $form = $this->createForm(EdituserType::class, $user);
         $form->handleRequest($request);
 
         if($form->isSubmitted() && $form->isValid()){
@@ -94,6 +108,32 @@ public function addClassroom(ManagerRegistry  $doctrine,Request $request):Respon
         return $this->redirectToRoute('admin_utlisateurs');}
         return $this->renderForm("admin/adduser.html.twig",
         array("f"=>$form));
+    }
+    #[Route('/profile/modifier/{id}', name: 'modifier_profile')]
+    
+    public function editprofile(User $user, Request $request, TranslatorInterface $translator)
+    {
+        
+        $form = $this->createForm(EditProfileType::class, $user);
+        $form->handleRequest($request);
+       
+
+        if($form->isSubmitted() && $form->isValid()){
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($user);
+            $entityManager->flush();
+
+          
+
+            $this->addFlash('message', ' Profil mis a jour');
+            return $this->redirectToRoute('admin_profile');
+        }
+        
+        return $this->render('admin/editprofile.html.twig', [
+            'Form' => $form->createView()
+        ]);
+            
+       
     }
 
 

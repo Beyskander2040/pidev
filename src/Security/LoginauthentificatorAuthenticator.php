@@ -14,6 +14,7 @@ use Symfony\Component\Security\Http\Authenticator\Passport\Badge\UserBadge;
 use Symfony\Component\Security\Http\Authenticator\Passport\Credentials\PasswordCredentials;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 use Symfony\Component\Security\Http\Util\TargetPathTrait;
+use App\Entity\User;
 
 class LoginauthentificatorAuthenticator extends AbstractLoginFormAuthenticator
 {
@@ -45,16 +46,20 @@ class LoginauthentificatorAuthenticator extends AbstractLoginFormAuthenticator
         if ($targetPath = $this->getTargetPath($request->getSession(), $firewallName)) {
             return new RedirectResponse($targetPath);
         }
-
-        // For example:
-        if ($this->authorizationChecker->isGranted('ROLE_ADMIN')){
+       
         
-         return new RedirectResponse($this->urlGenerator->generate('admin_index'));
-        }
-         return new RedirectResponse($this->urlGenerator->generate('user_user'));
+        $user = $token->getUser();
+    if (in_array('ROLE_ADMIN', $user->getRoles(), true)) {
+    return new RedirectResponse($this->urlGenerator->generate('admin_index'));
+    } elseif (in_array('ROLE_VENDEUR', $user->getRoles(), true)) {
+    return new RedirectResponse($this->urlGenerator->generate('vendeur_vendeur'));
+    } 
+     return new RedirectResponse($this->urlGenerator->generate('user_user'));
+}
+
     
          
-    }
+    
         // throw new \Exception('TODO: provide a valid redirect inside '.__FILE__);
     
 

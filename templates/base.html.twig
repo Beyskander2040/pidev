@@ -28,7 +28,7 @@
 
 
 
-{% block body %}
+
 
 <body>
 <!-- Page Preloder -->
@@ -37,6 +37,7 @@
 </div>
 
 <!-- Offcanvas Menu Begin -->
+{% block menu %}
 <div class="offcanvas-menu-overlay"></div>
 <div class="offcanvas-menu-wrapper">
     <div class="offcanvas__option">
@@ -65,8 +66,10 @@
     </div>
 </div>
 <!-- Offcanvas Menu End -->
+{% endblock %}
 
 <!-- Header Section Begin -->
+{% block header  %}
 <header class="header">
     <div class="header__top">
         <div class="container">
@@ -95,6 +98,7 @@
             </div>
         </div>
     </div>
+    
     <div class="container">
         <div class="row">
             <div class="col-lg-3 col-md-3">
@@ -105,7 +109,8 @@
             <div class="col-lg-6 col-md-6">
                 <nav class="header__menu mobile-menu">
                     <ul>
-                        <li class="active"><a href="./index.html">Home</a></li>
+                    <li><a href="{{ path('user_profile') }}">My Profile</a>
+                        <li class="active"><a href="{{ path('user_user') }}">Home</a></li>
                         <li><a href="./shop.html">Shop</a></li>
                         <li><a href="#">Event</a>
                         </li>
@@ -123,13 +128,15 @@
                 </div>
             </div>
         </div>
+       
         <div class="canvas__open"><i class="fa fa-bars"></i></div>
     </div>
 </header>
 <!-- Header Section End -->
-
+{% endblock  %}
+{% block body %} 
 <!-- Hero Section Begin -->
-{% block content %}
+
 <section class="hero">
     <div class="hero__slider owl-carousel">
    
@@ -138,13 +145,13 @@
             <div class="container">
                 <div class="row">
                     <div class="col-xl-5 col-lg-7 col-md-8">
-                    {% block sk %}
+                  
                         <div class="hero__text">
                             <h6>Summer Collection</h6>
                             <h2>Fall - Winter Collections 2023</h2>
                             <p>A specialist label creating luxury essentials. Ethically crafted with an unwavering commitment to exceptional quality.</p>
                             <a href="#" class="primary-btn">Shop now <span class="arrow_right"></span></a>
-                            {% endblock  %}
+                          
                             <div class="hero__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
                                 <a href="#"><i class="fa fa-twitter"></i></a>
@@ -157,7 +164,7 @@
             </div>
 
         </div>
-        {% endblock  %}
+      
         
 
         <div class="hero__items set-bg" data-setbg="{{ asset('img/hero/hero-2.jpg') }}">
@@ -649,8 +656,10 @@
     </div>
 </section>
 <!-- Latest Blog Section End -->
+{% endblock %}
 
 <!-- Footer Section Begin -->
+{% block footer %}
 <footer class="footer">
     <div class="container">
         <div class="row">
@@ -716,6 +725,7 @@
     </div>
 </footer>
 <!-- Footer Section End -->
+{% endblock  %}
 
 <!-- Search Begin -->
 <div class="search-model">
@@ -740,6 +750,6 @@
 <script src="{{ asset('js/owl.carousel.min.js') }}"></script>
 <script src="{{ asset('js/main.js') }}"></script>
 </body>
-{% endblock %}
+
 
 </html>

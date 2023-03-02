@@ -31,9 +31,9 @@ class EdituserType extends AbstractType
         ->add('roles', ChoiceType::class, [
             'choices' => [
                 'Utilisateur' => 'ROLE_USER',
-                'Editeur' => 'ROLE_EDITOR',
-                'Modérateur' => 'ROLE_MODO',
-                'Administrateur' => 'ROLE_ADMIN'
+                'vendeur' => 'ROLE_EDITOR',
+                
+               
             ],
             // case a cocher
             'expanded' => true,

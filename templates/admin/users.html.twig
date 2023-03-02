@@ -1,5 +1,5 @@
  {% extends 'base1.html.twig' %}  
-{% block title %}  <h1>bonjour</h1> {% endblock  %}
+
 
 
  
@@ -118,7 +118,7 @@
                         </a>
                         <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                             <a href="#" class="dropdown-item">My Profile</a>
-                            <a href="#" class="dropdown-item">Log Out</a>
+                            <a href="{{ path('app_logout') }}" class="dropdown-item">Log Out</a>
                         </div>
                     </div>
                 </div>
@@ -196,13 +196,15 @@
                                     <td>{{Users.prenom }}</td>
                                     <td>{{Users.Email }}</td>
                                      <td>
-                                        {%  for role in Users.roles  %}
-                                     {% if role == "ROLE_USER" %}
-                                     Utlisateur 
-                                     {% elseif role == "ROLE_ADMIN" %}
-                                       Administrateur 
-                                       {% endif %}
-                                          {%  endfor %}
+                                          {% for role in Users.roles %}
+                                           {% if role == "ROLE_USER" %}
+                                            Utilisateur
+                                           {% elseif role == "ROLE_ADMIN" %}
+                                               Administrateur
+                                             {% else %}
+                                                   Vendeur
+                                             {% endif %}
+                                             {% endfor %}
                                      </td> 
                                     <td> <button type="button" class="btn btn-outline-secondary"><a href="{{path('admin_modifier_utlisateurs',{'id':Users.id}) }}">Modifier </a></button>
                                     <button type="button" class="btn btn-outline-danger"><a href="{{path('admin_supprimer_utlisateurs',{'id':Users.id}) }}">Supprimer </a></button></td>
