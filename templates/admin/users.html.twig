@@ -182,6 +182,7 @@
                                     <th scope="col">Nom</th>
                                     <th scope="col">prenom</th>
                                     <th scope="col">Email</th>
+                                    <th scope="col">photo de profile </th>
                                     <th scope="col">Role</th> 
                                     <th scope="col">Action</th>
                                 </tr>
@@ -195,6 +196,14 @@
                                     <td>{{Users.nom }}</td>
                                     <td>{{Users.prenom }}</td>
                                     <td>{{Users.Email }}</td>
+                      {% if Users.image %}
+            <td><img src="{{ asset('uploads/user/' ~ Users.image) }}" width="150" height="150"></td>
+        {% else %}
+            <td></td>
+        {% endif %}
+
+                                     
+
                                      <td>
                                           {% for role in Users.roles %}
                                            {% if role == "ROLE_USER" %}
